@@ -23,8 +23,6 @@ for j in range(0, num_samples):
   # Report progress
   if j % 100 == 0:
     print(j)
-  # Determine wave length (the higher, the shorter)
-  wave_length = np.random.randint(1, 2)
   # Generate wave
   for i in range(starting_point, total_num_elements):
     x_val = i * interval_per_element
@@ -32,7 +30,7 @@ for j in range(0, num_samples):
     xs.append(x_val)
     ys.append(y_val)
   # Append wave to samples
-  samples.append((xs, ys, wave_length))
+  samples.append((xs, ys))
   # Clear subsample containers for next sample
   xs = []
   ys = []
@@ -46,9 +44,7 @@ np.save('./signal_waves_medium.npy', samples)
 # Visualize a few random samples
 for i in range(0, num_samples_visualize):
   random_index = np.random.randint(0, len(samples)-1)
-  x_axis, y_axis, wave_length = samples[random_index]
-  if wave_length == 1:
-    wave_length = ''
+  x_axis, y_axis = samples[random_index]
   plt.plot(x_axis, y_axis)
-  plt.title(f'Visualization of sample {random_index} ---- y: f(x) = sin({wave_length}x)')
+  plt.title(f'Visualization of sample {random_index} ---- y: f(x) = x^2')
   plt.show()

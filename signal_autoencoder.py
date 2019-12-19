@@ -1,10 +1,9 @@
 import keras
-from keras.datasets import mnist
 from keras.models import Sequential
-from keras.layers import Conv2D, Conv2DTranspose, Dropout
+from keras.layers import Conv2D, Conv2DTranspose
+from keras.constraints import max_norm
 import matplotlib.pyplot as plt
 import numpy as np
-from keras.constraints import max_norm
 import math
 
 # Model configuration
@@ -19,9 +18,9 @@ max_norm_value = 2.0
 
 # Load data
 data_noisy = np.load('./signal_waves_noisy_medium.npy')
-x_val_noisy, y_val_noisy, wave_lengths_noisy = data_noisy[:,0], data_noisy[:,1], data_noisy[:,2]
+x_val_noisy, y_val_noisy = data_noisy[:,0], data_noisy[:,1]
 data_pure = np.load('./signal_waves_medium.npy')
-x_val_pure, y_val_pure, wave_lengths_pure = data_pure[:,0], data_pure[:,1], data_pure[:,2]
+x_val_pure, y_val_pure = data_pure[:,0], data_pure[:,1]
 
 # Reshape data
 y_val_noisy_r = []
@@ -39,8 +38,6 @@ y_val_noisy_r   = np.array(y_val_noisy_r)
 y_val_pure_r    = np.array(y_val_pure_r)
 noisy_input     = y_val_noisy_r.reshape((y_val_noisy_r.shape[0], y_val_noisy_r.shape[1], y_val_noisy_r.shape[2], 1))
 pure_input      = y_val_pure_r.reshape((y_val_pure_r.shape[0], y_val_pure_r.shape[1], y_val_pure_r.shape[2], 1))
-
-print(np.max(noisy_input))
 
 # Train/test split
 percentage_training = math.floor((1 - train_test_split) * len(noisy_input))
