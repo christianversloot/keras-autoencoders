@@ -1,0 +1,5 @@
+/signals
+/signals with noise
+/filter_visualizations
+*.png
+*.npy
