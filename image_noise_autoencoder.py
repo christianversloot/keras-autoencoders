@@ -57,9 +57,6 @@ model.add(Conv2DTranspose(64, kernel_size=(3,3), kernel_constraint=max_norm(max_
 model.add(Conv2D(1, kernel_size=(3, 3), kernel_constraint=max_norm(max_norm_value), activation='sigmoid', padding='same'))
 
 model.summary()
-from keras.utils.vis_utils import plot_model
-
-plot_model(model, to_file='model.png')
 
 # Compile and fit data
 model.compile(optimizer='adam', loss='binary_crossentropy')
